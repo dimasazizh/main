@@ -40,6 +40,14 @@
                 }
             }
         </style>
+          <!-- Google Tag Manager-->
+      <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PGQ9WQT');
+      </script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -72,10 +80,10 @@
                         <form class="needs-validation" novalidate>
                             <div class="row g-3 align-items-center ">
                                 <div class="col">
-                                    <label for="firstName" class="form-label">Nama Lengkap <span class="text-muted">(berikut gelar)</span></label>
+                                    <label for="validationfirstName" class="form-label">Nama Lengkap <span class="text-muted">(berikut gelar)</span></label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                        <input type="text" class="form-control" id="firstName" placeholder="Nama lengkap" required>
+                                        <input type="text" class="form-control" id="validationfirstName" placeholder="Nama lengkap" required>
                                     <div class="invalid-feedback">
                                         Mohon mengisi nama lengkap.
                                     </div>
@@ -83,10 +91,10 @@
                                 </div>
                 
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Email <span class="text-muted"></span></label>
+                                    <label for="validationEmail" class="form-label">Email <span class="text-muted"></span></label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                        <input type="text" class="form-control" id="email" placeholder="you@example.com" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+                                        <input type="text" class="form-control" id="validationEmail" placeholder="you@example.com" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
                                         <div class="invalid-feedback">
                                             Mohon mengisi alamat email yang sesuai
                                         </div>
@@ -94,10 +102,10 @@
                                 </div>
                 
                                 <div class="col-12">
-                                    <label for="address" class="form-label">No. Telp <span class="text-muted">(whatsapp)</span></label>
+                                    <label for="validationPhone" class="form-label">No. Telp <span class="text-muted">(whatsapp)</span></label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text"><i class="bi bi-whatsapp"></i></span>
-                                        <input type="text" class="form-control" id="address" placeholder="08xxxxx" pattern="^(\+62|62|0)8[1-9][0-9]{6,9}$" required>
+                                        <input type="text" class="form-control" id="validationPhone" placeholder="08xxxxx" pattern="^(\+62|62|0)8[1-9][0-9]{6,9}$" required>
                                         <div class="invalid-feedback">
                                             Mohon mengisi nomor telepon yang sesuai (tanpa spasi atau tanda '-').
                                         </div>
@@ -105,10 +113,10 @@
                                 </div>
                 
                                 <div class="col-sm-9">
-                                    <label for="username" class="form-label">Asal Instansi <span class="text-muted">(universitas/lembaga/umum)</span></label>
+                                    <label for="validationInstansi" class="form-label">Asal Instansi <span class="text-muted">(universitas/lembaga/umum)</span></label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text"><i class="bi bi-building"></i></span>
-                                        <input type="text" class="form-control" id="instansi" placeholder="Instansi" required>
+                                        <input type="text" class="form-control" id="validationInstansi" placeholder="Instansi" required>
                                         <div class="invalid-feedback">
                                             Mohon mengisi asal instansi.
                                         </div>
@@ -116,7 +124,7 @@
                                 </div>
                                 
                                 <div class="col-sm-3">
-                                    <label for="profesi" class="form-label">Profesi <span class="text-muted"></span></label>
+                                    <label for="validationProfesi" class="form-label">Profesi <span class="text-muted"></span></label>
                                     <select class="form-select" aria-label="Profesi" id="validationProfesi" required>
                                         <option selected disabled value="">Pilih profesi</option>
                                         <option value="1">Guru</option>
@@ -140,7 +148,7 @@
                             </div>
 
                             <div class="text-center">
-                                <button class="w-25 btn btn-primary btn-lg" type="submit">Daftar</button>
+                                <button class="w-25 btn btn-primary btn-lg" id="submit" type="submit">Daftar</button>
                             </div>
                             
                         </form>
@@ -159,5 +167,59 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script>
+            $(function() {
+              $('#submit').on('click', function() {
+
+                // name
+                var name = $('#validationfirstName').val() || 'no set';
+                // email
+                var email = $('#validationEmail').val() || 'no set';
+                // no.telp
+                var phone = $('#validationPhone').val() || 'no set';
+                // instansi
+                var instansi = $('#validationInstansi').val() || 'no set';
+                // profesi
+                var profesi = $('#validationProfesi').val() || 'no set';
+
+                // gender
+                var gender = function() {
+                  var v;
+                  $('[name="demo_radio"]').each(function() {
+                    if($(this).prop('checked') === true) v = $(this).val();
+                  });
+                  return v;
+                };
+
+                // category
+                //var profesi = $('#profesi').val() || 'no set';
+
+                // question
+                //var question = $('#demo_textarea').val() || 'no set';
+
+                // post
+                var data = {
+                  'entry.871597416': name,
+                  'entry.796017555': email,
+                  'entry.1651895134': phone,
+                  'entry.1181466601': instansi
+                  'entry.1254778813': profesi
+                };
+                $.ajax({
+                  type: 'POST',
+                  url: 'https://docs.google.com/forms/u/1/d/e/1FAIpQLSd9oTHRPWIuWkByGyMs4df_URSsYAtsvkckk_IZKLNFZh-JZw/formResponse',
+                  data: data,
+                  contentType: 'application/json',
+                  dataType: 'jsonp',
+                  complete: function() {
+                    alert('send success');
+                  }
+                });
+
+              });
+            });
+          </script>
     </body>
 </html>
